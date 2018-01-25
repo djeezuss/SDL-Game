@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL.h>
 #include "Logger.h"
+#include "Input.h"
 #include "Game.h"
 
 namespace SDL_Game
@@ -12,6 +13,7 @@ namespace SDL_Game
 		int SCREEN_WIDTH;
 		
 		Logger* logger;
+		Input* input;
 		Game* game;
 
 		SDL_Window* window;
@@ -24,6 +26,8 @@ namespace SDL_Game
 		void Close(int exitId);
 
 		SDL_Renderer* GetRenderer();
+		Logger* GetLogger();
+		Input* GetInput();
 	};
 }
 

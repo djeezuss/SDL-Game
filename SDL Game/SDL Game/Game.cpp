@@ -5,12 +5,23 @@ namespace SDL_Game
 {
 	void Game::ProcessEvents()
 	{
-		while (SDL_PollEvent(&sdl_event))
+		SDL_Event e;
+		while (SDL_PollEvent(&e))
 		{
-			// User requests quit
-			if (sdl_event.type == SDL_QUIT)
+			if (e.type == SDL_QUIT)
 			{
-				running = false;
+				StopGameLoop();
+			}
+			else
+			{
+				if (input->KeyPressed("Horizontal-", &e))
+					logger->Debug("Horizontal-");
+				else if (input->KeyPressed("Horizontal+", &e))
+					logger->Debug("Horizontal+");
+				else if (input->KeyPressed("Vertical-", &e))
+					logger->Debug("Vertical-");
+				else if (input->KeyPressed("Vertical+", &e))
+					logger->Debug("Vertical+");
 			}
 		}
 	}
@@ -30,6 +41,8 @@ namespace SDL_Game
 	Game::Game(Application* app)
 	{
 		this->app = app;
+		logger = app->GetLogger();
+		input = app->GetInput();
 		running = false;
 	}
 
@@ -53,5 +66,9 @@ namespace SDL_Game
 			// Update
 			SDL_RenderPresent(app->GetRenderer());
 		}
+	}
+	void Game::StopGameLoop()
+	{
+		running = false;
 	}
 }

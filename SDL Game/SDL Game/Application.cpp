@@ -6,6 +6,7 @@ namespace SDL_Game
 	Application::Application(std::string title, int width, int heigth)
 	{
 		logger = new Logger();
+		input = new	Input();
 
 		window = NULL;
 		renderer = NULL;
@@ -40,6 +41,7 @@ namespace SDL_Game
 	Application::~Application()
 	{
 		delete logger;
+		delete input;
 		delete game;
 
 		SDL_DestroyWindow(window);
@@ -53,12 +55,19 @@ namespace SDL_Game
 
 	void Application::Close(int exitId)
 	{
-		system("pause");
-		exit(exitId);
+		game->StopGameLoop();
 	}
 
 	SDL_Renderer* Application::GetRenderer()
 	{
 		return renderer;
+	}
+	Logger * Application::GetLogger()
+	{
+		return logger;
+	}
+	Input * Application::GetInput()
+	{
+		return input;
 	}
 }

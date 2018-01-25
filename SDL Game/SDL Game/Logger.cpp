@@ -1,5 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
-
 #include "Logger.h"
 
 
@@ -7,16 +5,15 @@ namespace SDL_Game
 {
 	std::string Logger::GetTimeFormat()
 	{
-		time_t rawtime;
-		struct tm* timeinfo;
-		char buffer[18];
+		time_t rawtime = time(NULL);
+		struct tm timeinfo;
+		std::stringstream buffer;
 
-		time(&rawtime);
-		timeinfo = localtime(&rawtime);
+		localtime_s(&timeinfo, &rawtime);
 
-		strftime(buffer, 18, "[%F %T]", timeinfo);
+		buffer << std::put_time(&timeinfo ,"[%T]");
 
-		return std::string(buffer);
+		return buffer.str();
 	}
 
 	void Logger::CommonLog(std::string message)

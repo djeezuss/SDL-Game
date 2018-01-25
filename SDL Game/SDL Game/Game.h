@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL.h>
-
+#include "Logger.h"
+#include "Input.h"
 
 namespace SDL_Game
 {
@@ -10,7 +11,8 @@ namespace SDL_Game
 	{
 	private:
 		Application* app;
-		SDL_Event sdl_event;
+		Logger* logger;
+		Input* input;
 
 		bool running;
 
@@ -22,6 +24,7 @@ namespace SDL_Game
 		~Game();
 
 		void GameLoop();
+		void StopGameLoop();
 	};
 }
 
