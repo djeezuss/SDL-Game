@@ -2,15 +2,18 @@
 #include "GuiObject.h"
 #include "SDL.h"
 
-class GuiImageLabel : public GuiObject
-{
-private:
-	SDL_Texture* Image;
+namespace SDL_Game {
+	class GuiImageLabel : public GuiObject
+	{
+	private:
+		SDL_Texture * Image;
+		SDL_Rect pos;
 
-public:
-	GuiImageLabel();
-	~GuiImageLabel();
+	public:
+		GuiImageLabel(SDL_Texture* texture);
+		~GuiImageLabel();
 
-	void Draw(SDL_Renderer* renderer);
-};
-
+		void Draw(void* sdl_renderer) override;
+		void PrepareRenderer(std::set<GuiObject*>* list) override;
+	};
+}

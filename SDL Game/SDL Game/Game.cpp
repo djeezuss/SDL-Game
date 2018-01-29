@@ -1,5 +1,9 @@
 #include "Game.h"
 #include "Application.h"
+#include <SDL_image.h>
+
+#include "GuiImageLabel.h"
+#include "GuiScreen.h"
 
 namespace SDL_Game
 {
@@ -43,6 +47,7 @@ namespace SDL_Game
 		this->app = app;
 		logger = app->GetLogger();
 		input = app->GetInput();
+		guiRenderer = app->GetGuiRenderer(); //Added from GuiTest branch
 		running = false;
 	}
 
@@ -54,6 +59,27 @@ namespace SDL_Game
 	void Game::GameLoop()
 	{
 		running = true;
+		
+
+		//-----------------------------------------------GuiTest Begin
+
+		GuiObject* gui = nullptr;
+		if (gui = guiRenderer->AddScreenGui())
+			logger->Info("New Gui Added!");
+		else
+			logger->Info("Failed to add Gui");
+
+		SDL_Texture* texture = IMG_LoadTexture(app->GetRenderer(), "assets/images/SimpleBox.png");
+		GuiImageLabel* image = new GuiImageLabel(texture);
+		image->SetName("Image Label");
+		image->SetParent(gui);
+
+		GuiImageLabel* image2 = new GuiImageLabel(texture);
+		image2->SetName("Image Label2");
+		image2->SetParent(image);
+
+
+		//-----------------------------------------------GuiTest End
 
 		while (running)
 		{
@@ -62,6 +88,14 @@ namespace SDL_Game
 			ClearRenderer(app->GetRenderer());
 
 			Render(app->GetRenderer());
+
+
+			//-----------------------------------------------GuiTest Begin
+
+			guiRenderer->RenderGui(app->GetRenderer());
+
+			//-----------------------------------------------GuiTest End
+			
 
 			// Update
 			SDL_RenderPresent(app->GetRenderer());

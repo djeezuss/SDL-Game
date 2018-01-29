@@ -7,6 +7,7 @@ namespace SDL_Game
 	{
 		logger = new Logger();
 		input = new	Input();
+		guiRenderer = new GuiRenderer(); //Added from GuiTest branch
 
 		window = NULL;
 		renderer = NULL;
@@ -27,7 +28,7 @@ namespace SDL_Game
 			Close(-1);
 		}
 
-		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
 		if (renderer == NULL)
 		{
 			logger->Error("SDL Renderer could not initialise : " + std::string(SDL_GetError()));
@@ -43,6 +44,7 @@ namespace SDL_Game
 		delete logger;
 		delete input;
 		delete game;
+		delete guiRenderer;
 
 		SDL_DestroyWindow(window);
 		SDL_DestroyRenderer(renderer);
@@ -69,5 +71,9 @@ namespace SDL_Game
 	Input * Application::GetInput()
 	{
 		return input;
+	}
+	GuiRenderer* Application::GetGuiRenderer() //Added from GuiTest branch
+	{
+		return guiRenderer;
 	}
 }

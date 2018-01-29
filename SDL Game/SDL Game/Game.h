@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include "Logger.h"
 #include "Input.h"
+#include "GuiRenderer.h"
 
 namespace SDL_Game
 {
@@ -13,6 +14,8 @@ namespace SDL_Game
 		Application* app;
 		Logger* logger;
 		Input* input;
+
+		GuiRenderer* guiRenderer; //Added from GuiTest branch
 
 		bool running;
 
