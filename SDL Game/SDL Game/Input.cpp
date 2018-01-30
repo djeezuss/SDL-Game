@@ -35,6 +35,7 @@ namespace SDL_Game
 			{ "Vertical-", SDLK_DOWN },
 			{ "Vertical+", SDLK_s },
 			{ "Vertical+", SDLK_UP },
+			{ "Pause", SDLK_ESCAPE },
 			{ "Jump", SDLK_SPACE }
 		};
 	}

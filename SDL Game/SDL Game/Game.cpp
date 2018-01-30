@@ -32,7 +32,7 @@ namespace SDL_Game
 		SDL_RenderClear(app->GetRenderer());
 	}
 
-	void Game::Render(SDL_Renderer * renderer)
+	void Game::Draw(SDL_Renderer * renderer)
 	{
 		SDL_SetRenderDrawColor(app->GetRenderer(), 0, 0, 0, 255);
 		SDL_RenderDrawRect(app->GetRenderer(), NULL);
@@ -61,9 +61,9 @@ namespace SDL_Game
 
 			ClearRenderer(app->GetRenderer());
 
-			Render(app->GetRenderer());
+			Draw(app->GetRenderer());
 
-			// Update
+			// Render
 			SDL_RenderPresent(app->GetRenderer());
 		}
 	}

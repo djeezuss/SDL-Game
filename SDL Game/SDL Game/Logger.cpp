@@ -19,6 +19,7 @@ namespace SDL_Game
 	void Logger::CommonLog(std::string message)
 	{
 		std::cout << GetTimeFormat() << " " << message << std::endl;
+		filelog << GetTimeFormat() << " " << message << std::endl;
 	}
 
 	Logger::Logger()
@@ -26,11 +27,17 @@ namespace SDL_Game
 		debugEnabled = true;
 		infoEnabled = true;
 		errorEnabled = true;
+
+		filelog.open("log.txt", std::ios::out);
+
+		Info("Logger initialised.");
 	}
 
 
 	Logger::~Logger()
-	{}
+	{
+		filelog.close();
+	}
 
 	void Logger::Debug(std::string message)
 	{

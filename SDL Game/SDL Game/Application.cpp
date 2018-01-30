@@ -14,25 +14,31 @@ namespace SDL_Game
 		SCREEN_WIDTH = width;
 		SCREEN_HEIGHT = heigth;
 
+		logger->Info("Initialising SDL ...");
 		if (SDL_Init(SDL_INIT_EVERYTHING))
 		{
-			logger->Error("SDL could not initialise : " + std::string(SDL_GetError()) + "\n");
+			logger->Error("SDL could not initialise : " + std::string(SDL_GetError()));
 			Close(-1);
 		}
+		logger->Info("SDL initialised.");
 		
+		logger->Info("Creating the Window ...");
 		window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 		if (window == NULL)
 		{
 			logger->Error("SDL Window could not initialise : " + std::string(SDL_GetError()));
 			Close(-1);
 		}
+		logger->Info("Window created.");
 
+		logger->Info("Creating the Renderer ...");
 		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 		if (renderer == NULL)
 		{
 			logger->Error("SDL Renderer could not initialise : " + std::string(SDL_GetError()));
 			Close(-1);
 		}
+		logger->Info("Renderer created.");
 
 		game = new Game(this);
 	}
@@ -50,6 +56,7 @@ namespace SDL_Game
 
 	void Application::StartGame()
 	{
+		logger->Info("Starting main Game Loop.");
 		game->GameLoop();
 	}
 

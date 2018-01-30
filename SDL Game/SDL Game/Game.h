@@ -18,7 +18,7 @@ namespace SDL_Game
 
 		void ProcessEvents();
 		void ClearRenderer(SDL_Renderer* renderer);
-		void Render(SDL_Renderer* renderer);
+		void Draw(SDL_Renderer* renderer);
 	public:
 		Game(Application* app);
 		~Game();

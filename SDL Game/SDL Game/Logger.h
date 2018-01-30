@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <fstream>
 #include <iomanip>
 #include <sstream>
 #include <string>
@@ -10,6 +11,8 @@ namespace SDL_Game
 	class Logger
 	{
 	private:
+		std::ofstream filelog;
+
 		bool debugEnabled;
 		bool infoEnabled;
 		bool errorEnabled;
