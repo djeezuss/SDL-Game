@@ -40,6 +40,14 @@ namespace SDL_Game
 		}
 		logger->Info("Renderer created.");
 
+		logger->Info("Initialising SDL_image ...");
+		if (!IMG_Init(IMG_INIT_PNG))
+		{
+			logger->Error("SDL Image could not be initialised : " + std::string(SDL_GetError()));
+			Close(-1);
+		}
+		logger->Info("SDL_image initialised.");
+
 		game = new Game(this);
 	}
 
